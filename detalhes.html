@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Reserva</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="banner">
+        <h1>Pousada XYZ - Detalhes da Reserva</h1>
+    </div>
+    <div class="container">
+        <h2>Detalhes da Reserva</h2>
+        <p>ID: {{ reserva.id }}</p>
+        <p>Nome: {{ reserva.nome }}</p>
+        <p>Email: {{ reserva.email }}</p>
+        <p>Telefone: {{ reserva.telefone }}</p>
+        <p>Data de Entrada: {{ reserva.data_entrada }}</p>
+        <p>Data de Saída: {{ reserva.data_saida }}</p>
+        <p>Tipo de Quarto: {{ reserva.tipo_quarto }}</p>
+        <a href="{{ url_for('admin') }}" class="button">Voltar</a>
+    </div>
+</body>
+</html>

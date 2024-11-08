@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}Administração de Reservas{% endblock %}
+
+{% block content %}
+<h2>Reservas</h2>
+<form method="GET" action="{{ url_for('admin') }}">
+    <input type="text" name="search" placeholder="Buscar por nome ou email" value="{{ search }}">
+    <select name="tipo_quarto">
+        <option value="">Todos os Quartos</option>
+        <option value="standard" {% if tipo_quarto_filter == 'standard' %} selected {% endif %}>Standard</option>
+        <option value="luxo" {% if tipo_quarto_filter == 'luxo' %} selected {% endif %}>Luxo</option>
+        <option value="suite" {% if tipo_quarto_filter == 'suite' %} selected {% endif %}>Suíte</option>
+    </select>
+    <select name="ordem">
+        <option value="id" {% if ordem == 'id' %} selected {% endif %}>ID</option>
+        <option value="nome" {% if ordem == 'nome' %} selected {% endif %}>Nome</option>
+        <option value="data_entrada" {% if ordem == 'data_entrada' %} selected {% endif %}>Data de Entrada</option>
+    </select>
+    <button type="submit" class="button">Filtrar</button>
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Data de Entrada</th>
+            <th>Data de Saída</th>
+            <th>Tipo de Quarto</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reserva in reservas %}
+            <tr>
+                <td>{{ reserva.id }}</td>
+                <td>{{ reserva.nome }}</td>
+                <td>{{ reserva.email }}</td>
+                <td>{{ reserva.telefone }}</td>
+                <td>{{ reserva.data_entrada }}</td>
+                <td>{{ reserva.data_saida }}</td>
+                <td>{{ reserva.tipo_quarto }}</td>
+                <td>
+                    <a href="{{ url_for('edit', id=reserva.id) }}" class="button">Editar</a>
+                    <h2>Reservas</h2>
+                    <a href="{{ url_for('delete', id=reserva.id) }}" onclick="return confirm('Tem certeza que deseja deletar esta reserva?')" class="button">Deletar</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

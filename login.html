@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="banner">
+        <h1>Login de acesso</h1>
+        <h2>Sistema de Relatórios de Solicitação de Reservas</h2>
+        <nav>
+            <a href="{{ url_for('index') }}" class="button-nav">Home</a>
+            {% if current_user.is_authenticated %}  
+                <form method="POST" action="{{ url_for('logout') }}" style="display: inline;">
+                    <button type="submit" class="button-nav">Sair</button>
+                </form>
+            {% endif %}
+        </nav>
+    </div>
+    <div class="container">
+        {% if not current_user.is_authenticated %}
+        <form method="POST" action="{{ url_for('login') }}">
+            <label for="username">Nome de Usuário:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit" class="button-nav">Login</button>
+        </form>
+        {% endif %}
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

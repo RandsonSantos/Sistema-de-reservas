@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="banner">
+        <h1>Confirmação de Reserva</h1>
+        <nav>
+            <a href="{{ url_for('index') }}" class="button-nav">Home</a>
+            <a href="{{ url_for('login') }}" class="button-nav">Login</a>
+            {% if current_user.is_authenticated %}
+                <form method="POST" action="{{ url_for('logout') }}" style="display: inline;">
+                    <button type="submit">Sair</button>
+                </form>
+            {% endif %}
+        </nav>
+    </div>
+    <div class="container">
+        <p>Obrigado, {{ nome }}! Sua reserva foi enviada em breve entraremos em contato para confirmação.</p>
+    </div>
+</body>
+</html>

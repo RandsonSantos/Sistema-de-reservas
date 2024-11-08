@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Reserva</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="banner">
+        <h1>Pousada XYZ - Editar Reserva</h1>
+    </div>
+    <div class="container">
+        <h2>Editar Reserva</h2>
+        <form action="{{ url_for('edit', id=reserva['id']) }}" method="post">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="{{ reserva['nome'] }}" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ reserva['email'] }}" required>
+            
+            <label for="telefone">Telefone:</label>
+            <input type="tel" id="telefone" name="telefone" value="{{ reserva['telefone'] }}" required>
+            
+            <label for="data_entrada">Data de Entrada:</label>
+            <input type="date" id="data_entrada" name="data_entrada" value="{{ reserva['data_entrada'] }}" required>
+            
+            <label for="data_saida">Data de Saída:</label>
+            <input type="date" id="data_saida" name="data_saida" value="{{ reserva['data_saida'] }}" required>
+            
+            <label for="tipo_quarto">Tipo de Quarto:</label>
+            <select id="tipo_quarto" name="tipo_quarto" required>
+                <option value="standard" {% if reserva['tipo_quarto'] == 'standard' %} selected {% endif %}>Standard</option>
+                <option value="luxo" {% if reserva['tipo_quarto'] == 'luxo' %} selected {% endif %}>Luxo</option>
+                <option value="suite" {% if reserva['tipo_quarto'] == 'suite' %} selected {% endif %}>Suíte</option>
+            </select>
+            
+            <button type="submit">Salvar Alterações</button>
+        </form>
+    </div>
+</body>
+</html>
